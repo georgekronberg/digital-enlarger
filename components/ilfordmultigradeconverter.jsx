@@ -44,7 +44,7 @@ const IlfordMultigradeConverter = () => {
         img.onload = () => {
           setImage(img);
         };
-        img.src = event.target?.result as string;
+        img.src = event.target.result;
       };
       reader.readAsDataURL(file);
     }
@@ -205,7 +205,7 @@ const IlfordMultigradeConverter = () => {
   } : {};
 
   return (
-    <div className="flex flex-col p-4 max-w-4xl mx-auto" style={darkroomStyleOverrides as React.CSSProperties}>
+    <div className="flex flex-col p-4 max-w-4xl mx-auto" style={darkroomStyleOverrides}>
       {isFullScreen ? (
         <div 
           ref={fullScreenRef} 
@@ -249,7 +249,7 @@ const IlfordMultigradeConverter = () => {
                         '--slider-track': 'var(--custom-red, #500)',
                         '--slider-range': 'var(--custom-red, #500)',
                         '--slider-thumb': 'var(--custom-red, #500)',
-                      } as React.CSSProperties}
+                      }}
                       className="w-full"
                     />
                   </div>
@@ -274,7 +274,7 @@ const IlfordMultigradeConverter = () => {
                         '--slider-track': 'var(--custom-red, #500)',
                         '--slider-range': 'var(--custom-red, #500)',
                         '--slider-thumb': 'var(--custom-red, #500)',
-                      } as React.CSSProperties}
+                      }}
                       className="w-full"
                     />
                   </div>
