@@ -462,12 +462,12 @@ const IlfordMultigradeConverter = () => {
                     <ol className="list-decimal pl-4 space-y-1">
                       <li>Upload your black and white image</li>
                       <li>Adjust the contrast grade to match your desired Ilford Multigrade filter</li>
-                      <li>Keep "Invert Image" checked for direct printing</li>
+                      <li>Keep &quot;Invert Image&quot; checked for direct printing</li>
                       <li>Adjust brightness as needed</li>
                       <li>Enable grid for easier alignment if needed</li>
                       <li>Enter full-screen mode and place photo paper on screen</li>
                       <li>Use spacebar to show/hide the image for exposure</li>
-                      <li>Develop normally according to Ilford's instructions</li>
+                      <li>Develop normally according to Ilford&apos;s instructions</li>
                     </ol>
                   </div>
                 </div>
