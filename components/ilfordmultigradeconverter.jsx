@@ -408,20 +408,24 @@ const IlfordMultigradeConverter = () => {
     if (!ctx) return;
     
     if (isFullScreen) {
-      // Calculate dimensions to fit screen while maintaining aspect ratio
-      const screenRatio = window.innerWidth / window.innerHeight;
+      // Get the actual available screen space
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+      
       const imageRatio = image.width / image.height;
+      const screenRatio = screenWidth / screenHeight;
       
       if (imageRatio > screenRatio) {
-        // Fit to width
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerWidth / imageRatio;
+        // Image is wider than screen ratio - fit to width
+        canvas.width = screenWidth;
+        canvas.height = screenWidth / imageRatio;
       } else {
-        // Fit to height
-        canvas.height = window.innerHeight;
-        canvas.width = window.innerHeight * imageRatio;
+        // Image is taller than screen ratio - fit to height
+        canvas.height = screenHeight;
+        canvas.width = screenHeight * imageRatio;
       }
     } else {
+      // Normal preview mode
       canvas.width = image.width;
       canvas.height = image.height;
     }
@@ -550,11 +554,8 @@ const IlfordMultigradeConverter = () => {
               className={`absolute top-0 left-0 w-full z-10 ${exposureState === ExposureState.EXPOSE || exposureState === ExposureState.BLANK ? 'hidden' : ''}`}
             >
               <div className="p-4 border-b" style={{ borderColor: 'var(--custom-red, #500)', backgroundColor: 'var(--custom-bg, #000)' }}>
-                <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-bold" style={{ color: 'var(--custom-red, #500)' }}>
-                    Ilford Multigrade Printing Mode
-                  </h2>
-                  <Button 
+                <div className="flex items-center">
+                <Button 
                     onClick={toggleFullScreen}
                     variant="outline"
                     style={{ 
@@ -565,6 +566,10 @@ const IlfordMultigradeConverter = () => {
                   >
                     Exit Full Screen
                   </Button>
+                  <h2 className="text-xl font-bold ml-12" style={{ color: 'var(--custom-red, #500)' }}>
+                    Ilford Multigrade Printing Mode
+                  </h2>
+                  
                 </div>
               </div>
             </div>
@@ -599,14 +604,15 @@ const IlfordMultigradeConverter = () => {
                 </div>
               </div>
 
-              {/* Canvas container - always centered in the right 2/3 of screen */}
-              <div className="ml-auto w-2/3 h-full flex items-center justify-center z-100">
+              {/* Canvas container - positioned on the right side */}
+              <div className="absolute top-0 right-0 bottom-0 w-2/3 flex items-center justify-end z-100">
                 {image && (
                   <canvas 
                     ref={canvasRef}
-                    className="h-full object-contain"
+                    className="h-full object-contain object-right"
                     style={{
-                      visibility: exposureState === ExposureState.HIDDEN || exposureState === ExposureState.BLANK ? 'hidden' : 'visible'
+                      visibility: exposureState === ExposureState.HIDDEN || exposureState === ExposureState.BLANK ? 'hidden' : 'visible',
+                      maxWidth: '100%'
                     }}
                   />
                 )}
